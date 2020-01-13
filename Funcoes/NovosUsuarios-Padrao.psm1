@@ -2,8 +2,7 @@
 # Varios usuarios padroes da empresa
 # Ivo Dias
 
-# SE = Sem Email -> Para diferenciar do com suporte a criacao dos emails antigos
-function Novo-UsuarioADSE {
+function Novo-UsuarioAD {
     param (
         [parameter(position=0,Mandatory=$True)]
         $nome,
@@ -50,10 +49,17 @@ function Novo-UsuarioADSE {
         Copiar-Grupos $referencia $UsuarioAdministrador
 
         # Confirma a criacao
-        Add-Content -Path "$LogPath\Criados.$hash.log" -Value $userAlias
+        Add-Content -Path "$caminhoLOGs\Criados.$hash.log" -Value $userAlias
+
+        # Retorno da funcao
+        $mensagemRetorno = "$userAlias criado com sucesso"
     }
     catch {
         $ErrorMessage = $_.Exception.Message
-        Add-Content -Path "$LogPath\Erro.$hash.log" -Value "$userAlias | $ErrorMessage"
+        Add-Content -Path "$caminhoLOGs\Erro.$hash.log" -Value "$userAlias | $ErrorMessage"
+        # Retorno da funcao
+        $mensagemRetorno = "$userAlias | $ErrorMessage"
     }
+
+    return $mensagemRetorno
 }

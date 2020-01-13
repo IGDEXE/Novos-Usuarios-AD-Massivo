@@ -54,3 +54,19 @@ function Credencial-AD {
     $credencialSUM = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $usuarioAdministrador, (Get-Content $ArquivoSenha | ConvertTo-SecureString -Key $ChaveCriptografia)
     return $credencialSUM
 }
+
+# Funcao para pegar arquivo
+Function Localizar-Arquivo($initialDirectory) {
+    try {
+        [System.Reflection.Assembly]::LoadWithPartialName("System.windows.forms") | Out-Null
+        $OpenFileDialog = New-Object System.Windows.Forms.OpenFileDialog
+        $OpenFileDialog.initialDirectory = $initialDirectory
+        $OpenFileDialog.filter = "Arquivo de Dados (*.csv)| *.csv"
+        $OpenFileDialog.ShowDialog() | Out-Null
+        $OpenFileDialog.filename
+    }
+    catch {
+        $ErrorMessage = $_.Exception.Message # Recebe o erro
+        return $ErrorMessage # Exibe a mensagem de erro
+    }
+}
