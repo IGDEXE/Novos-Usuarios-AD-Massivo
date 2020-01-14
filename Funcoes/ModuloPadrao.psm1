@@ -47,7 +47,7 @@ function Credencial-AD {
     )
     # Para gerar esses arquivos, favor consultar a documentacao:
     # https://gallery.technet.microsoft.com/Gerar-arquivo-de-senha-302bad71
-    $usuarioAdministrador = "SUM@seniorsolution.com.br"
+    $usuarioAdministrador = "usuario@dominio.com.br"
     $identificador = "SEC@311020190706"
     $ArquivoSenha = "$caminhoArquivoSenha\$identificador.pass"
     $ChaveCriptografia = Get-Content "$caminhoArquivoSenha\$identificador.key"
